@@ -1,0 +1,12 @@
+C:\Users\Ura\source\repos\LambdaForums\LambdaForums\bin\Release\netcoreapp2.0\LambdaForums.deps.json
+C:\Users\Ura\source\repos\LambdaForums\LambdaForums\bin\Release\netcoreapp2.0\LambdaForums.runtimeconfig.json
+C:\Users\Ura\source\repos\LambdaForums\LambdaForums\bin\Release\netcoreapp2.0\LambdaForums.runtimeconfig.dev.json
+C:\Users\Ura\source\repos\LambdaForums\LambdaForums\bin\Release\netcoreapp2.0\LambdaForums.dll
+C:\Users\Ura\source\repos\LambdaForums\LambdaForums\bin\Release\netcoreapp2.0\LambdaForums.pdb
+C:\Users\Ura\source\repos\LambdaForums\LambdaForums\obj\Release\netcoreapp2.0\LambdaForums.csprojAssemblyReference.cache
+C:\Users\Ura\source\repos\LambdaForums\LambdaForums\obj\Release\netcoreapp2.0\LambdaForums.csproj.CoreCompileInputs.cache
+C:\Users\Ura\source\repos\LambdaForums\LambdaForums\obj\Release\netcoreapp2.0\UserSecretsAssemblyInfo.cs
+C:\Users\Ura\source\repos\LambdaForums\LambdaForums\obj\Release\netcoreapp2.0\LambdaForums.AssemblyInfoInputs.cache
+C:\Users\Ura\source\repos\LambdaForums\LambdaForums\obj\Release\netcoreapp2.0\LambdaForums.AssemblyInfo.cs
+C:\Users\Ura\source\repos\LambdaForums\LambdaForums\obj\Release\netcoreapp2.0\LambdaForums.dll
+C:\Users\Ura\source\repos\LambdaForums\LambdaForums\obj\Release\netcoreapp2.0\LambdaForums.pdb

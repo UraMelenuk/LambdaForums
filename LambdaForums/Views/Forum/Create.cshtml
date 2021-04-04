@@ -1,0 +1,41 @@
+﻿@model LambdaForums.Models.ForumL.AddForumModel
+
+<div class="container body-content">
+    <div class="row sectionHeader">
+        <div class="sectionHeading">
+            Create New Forum
+            <a asp-controller="Forum" asp-action="Index" class="btn btn-back" style="float:right; margin-right:12px;"> Back to Forum </a>
+        </div>
+    </div>
+    <div class="row">
+        <div id="createForumSection">
+            <form asp-action="AddForum" method="post" id="createForumForm" enctype="multipart/form-data">
+                <div class="form-group">
+                    <span asp-validation-for="Title" class="text-danger"></span><br />
+                    <label asp-for="Title"> Forum Title </label>
+                    <input asp-for="Title" class="form-control" placeholder="Choose forum title" />
+                </div>
+                <div class="form-group">
+                    <span asp-validation-for="Description" class="text-danger"></span><br />
+                    <label asp-for="Description"> Forum Description </label>
+                    <input asp-for="Description" class="form-control" placeholder="Write a brief description of the forum topic" />
+                </div>
+                <div id="upload">
+                    <label> Upload Forum Image </label>
+                    <br />
+                    <label class="btn btn-default btn-file">
+                        Browse <input asp-for="ImageUpload" typeof="file" style="display:none" />
+                    </label>
+                </div>
+                <br />
+                <button type="submit" id="newForumBtn" class="btn btn-submitPost"> Create Forum </button>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Валідація -->
+@section scripts{
+
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

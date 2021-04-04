@@ -1,0 +1,65 @@
+﻿@model LambdaForums.Models.ReplyL.DeletePostReplyModel
+
+<h2> Delete Reply </h2>
+
+<div class="container body-content">
+    @if (Context.User.Identity.IsAuthenticated)
+    {
+        <div class="row sectionHeader">
+            <div class="sectionHeading">
+                Delete Post
+                <a asp-controller="Post" asp-action="Index" asp-route-id="@Model.Post.Id" class="btn btn-back" style="float:right; margin-right:12px;">
+                    Back to Reply
+                </a>
+            </div>
+            <div class="sectionDescription">
+                <p>
+                    Are you sure you'd like to delete this post?
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <table class="table table-hover" id="userIndexTable" style="border: 1px solid black; background-color:white;">
+                <thead>
+                    <tr>
+                        <th> ReplyId </th>
+                        <th> ReplyContent </th>
+                        <th> ReplyCreated </th>
+                        <th> ReplyPostId </th>
+                        <th> ReplyUser</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div>@Html.DisplayFor(model => model.Id)</div>
+                        </td>
+                        <td>
+                            <div>@Html.DisplayFor(model => model.Content)</div>
+                        </td>
+                        <td>
+                            <div>@Html.DisplayFor(model => model.Created)</div>
+                        </td>
+                        <td>
+                            <div>@Html.DisplayFor(model => model.Post.Id)</div>
+                        </td>
+                        <td>
+                            <div>@Html.DisplayFor(model => model.Post.User)</div>
+                        </td>
+
+                        <td>
+                            <div>
+                                <form asp-controller="Reply" asp-action="Delete" asp-route-id="@Model.Id" method="post">
+                                    <div class="form-group" style="float:right;">
+                                        <input type="submit" class="btn btn-danger" value="ConfirmDelete" />
+                                    </div>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    }
+</div>

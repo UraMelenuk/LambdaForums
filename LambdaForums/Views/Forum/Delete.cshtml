@@ -1,0 +1,60 @@
+﻿@model LambdaForums.Models.ForumL.DeleteForumModel
+
+<div class="container body-content">
+    @if (User.IsInRole("Admin"))
+    {
+        <div class="row sectionHeader">
+            <div class="sectionHeading"> Delete Forum 
+                <a asp-controller="Forum" asp-action="Topic" asp-route-id="@Model.ForumId" class="btn btn-back" style="float:right; margin-right:12px;"> Back to Topic </a>
+            </div>
+            <div class="sectionDescription">
+                <p>
+                    Are you sure you'd like to delete this forum?
+                </p>
+            </div>
+        </div>
+            <div class="row">
+                <table class="table table-hover" id="userIndexTable" style="border: 1px solid black; background-color:white;">
+                    <thead>
+                        <tr>
+                            <th> ForumImage </th>
+                            <th> ForumTitle </th>
+                            <th> ForumDescription </th>
+                            <th> Posts </th>
+                            <th> Replies </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="forumLogo" style="background-image:url(@Model.ImageUrl);"></div>
+                            </td>
+                            <td>
+                                <div>@Html.DisplayFor(model => model.Title)</div>
+                            </td>
+                            <td>
+                                <div>@Html.DisplayFor(model => model.Description)</div>
+                            </td>
+                            <td>
+                                <div> All Posts on the Forum </div>
+                            </td>
+                            <td>
+                                <div> All Replies in the Posts </div>
+                            </td>
+
+                            <td>
+                                <div>
+                                    <form asp-controller="Forum" asp-action="Delete" asp-route-id="@Model.ForumId" method="post">
+                                        <div class="form-group" style="float:right;">
+                                            <input type="submit" class="btn btn-danger" value="ConfirmDelete" />
+                                        </div>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+    }
+</div>
+

@@ -1,0 +1,204 @@
+﻿@model LambdaForums.Models.PostL.PostIndexModel
+
+<div class="container body-content">
+
+    <div class="row postHeader">
+        <div class="postHeading">
+            @if (User.Identity.IsAuthenticated || Model.IsAuthorAdmin)
+            {
+                <span class="postIndexTitle">
+                    @Model.Title
+                </span>
+
+                @* btn Edit Post and Delete Post *@
+                    
+                <span id="headingBtn">
+                    <a asp-controller="Forum" asp-action="Topic" asp-route-id="@Model.ForumId" class="btn btn-back" style="margin-right:20px;"> Back to Topic </a>
+                </span>
+            }
+        </div>
+    </div>
+
+    <div class="row" id="postIndexContent">
+        <div class="col-md-3 postAuthorContainer">
+            <div class="postAuthorImage" style="background-image:url(@Model.AuthorImageUrl);"></div>
+            <a asp-controller="Profile" asp-action="Detail" asp-route-id="@Model.AuthorId">
+                @Model.AuthorName
+            </a>
+            <span class="postDate">@Model.Date</span>
+
+            @foreach (var reply in Model.Replies)
+            {
+
+            }
+            @*  ЗАКІНЧИВ ТУТ  *@
+            @if (Model.AuthorName == User.Identity.Name)
+            {
+                <div style="margin-top:20px; margin-left:20px;">
+                    <a asp-controller="Post" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning glyphicon glyphicon-edit"> Post  </a>
+                </div>
+                <div style="margin-top:10px; margin-left:20px;">
+                    <a asp-controller="Post" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger glyphicon glyphicon-trash"> Post </a>
+                </div>
+            }
+            else if (User.IsInRole("Admin"))
+            {
+                <div style="margin-top:20px; margin-left:10px;">
+
+                    @* is Admin  *@
+                    <span class="isAdmin smaller"> You're an Admin</span>
+
+                    <h4 style="font-family:Robato;">Post</h4>
+                    <a asp-controller="Post" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning glyphicon glyphicon-edit"></a>
+                    <a asp-controller="Post" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger glyphicon glyphicon-trash"></a>
+                </div>
+            }
+            @if (Model.AuthorName != User.Identity.Name)
+            {
+                <div style="margin-top:20px; margin-left:20px; display:none;">
+                    <a asp-controller="Post" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger glyphicon glyphicon-trash"> Post </a>
+                </div>
+            }
+            @**@
+           
+
+        </div>
+        <div class="col-md-9 postContentContainer">
+            <div class="postContent">
+                @Html.Raw(Model.PostContent)
+            </div>
+        </div>
+    </div>
+    <div class="row" id="replyDivider">
+
+    </div>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="row" id="postReplyRow">
+            <span>
+                <a asp-controller="Reply" asp-action="Create" asp-route-id="@Model.Id" class="btn btn-newReply"> Post Reply </a>
+            </span>
+        </div>
+    }
+
+    @if (Model.Replies.Any())
+    {
+        foreach (var reply in Model.Replies)
+        {
+            <div class="row replyContent">
+                <div class="col-md-3 postAuthorContainer">
+                    <div class="postAuthorImage" style="background-image:url(@reply.AuthorImageUrl)"></div>
+                    <a asp-controller="Profile" asp-action="Detail" asp-route-id="@reply.AuthorId">
+                        @reply.AuthorName
+                    </a>
+                    <span class="postDate"> @reply.Created </span>
+                    @* Delete reply user *@
+                    @if (reply.AuthorName == User.Identity.Name || User.IsInRole("Admin"))
+                    {
+                        <div style="margin-top:20px; margin-left:20px;">
+                            <a asp-controller="Reply" asp-action="Edit" asp-route-id="@reply.Id" class="btn btn-warning glyphicon glyphicon-edit"> Reply  </a>
+                        </div>
+                        <div style="margin-top:10px; margin-left:20px;">
+                            <a asp-controller="Reply" asp-action="Delete" asp-route-id="@reply.Id" class="btn btn-danger glyphicon glyphicon-trash"> Reply </a>
+                        </div>
+                    }
+                    @if (reply.AuthorName != User.Identity.Name)
+                    {
+                        <div style="margin-top:20px; margin-left:20px; display:none;">
+                            <a asp-controller="Reply" asp-action="Delete" asp-route-id="@reply.Id" class="btn btn-danger glyphicon glyphicon-trash"> Reply </a>
+                        </div>
+                    }
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <div style="margin-top:20px; margin-left:20px; display:none;">
+                            <a asp-controller="Reply" asp-action="Delete" asp-route-id="@reply.Id" class="btn btn-danger glyphicon glyphicon-trash"> Reply </a>
+                        </div>
+                    }
+                </div>
+                <div class="col-md-9 postContentContainer">
+                    <div class="postContent">
+                        @Html.Raw(reply.ReplyContent)
+                    </div>
+                </div>
+            </div>
+        }
+
+
+    }
+    else
+    {
+        <div class="noPosts">
+            <h3 style="color:#ff0000; background-color:#000">
+                There are no replies to this post ...<br />
+            </h3>
+        </div>
+    }
+</div>
+
+
+
+
+
+
+@*
+    <h1> @Model.Title </h1>
+
+    <div>
+        Author: @Model.AuthorName (@Model.AuthorRating)
+        Created: @Model.Created
+    </div>
+
+    <div>
+        @Model.PostContent
+    </div>
+
+    @if(Model.Replies.Any())
+    {
+        foreach(var reply in Model.Replies)
+        {
+            <div>
+                <div>
+                    Reply Author: @reply.AuthorName
+                    Reply Created: @reply.Created
+                </div>
+
+                <div>
+                    Reply: @reply.ReplyContent
+                </div>
+
+            </div>
+        }
+    }
+*@
+
+
+@* ----- Аунтефікація , і користувача і адміністратора  -----
+    @if (!User.Identity.IsAuthenticated)
+                {
+                    <p>
+                        <span style="color:white;">
+                            You must be a
+                            <a asp-controller="Account" asp-action="Register">
+                                Registered Member
+                            </a> to create a new post.
+                        </span>
+
+                        <span style="color:white;">
+                            Or Authorized
+                            <a asp-controller="Account" asp-action="Login">
+                            Authorized
+                            </a> to create a new post.
+                        </span>
+                    </p>
+                }
+                @if (User.IsInRole("Admin"))
+                {
+                    <div>
+                        <span id="headingBtn">
+                            <a asp-controller="Forum" asp-action="Edit" asp-route-id="@Model.Forum.Id" class="btn btn-warning glyphicon glyphicon-edit"></a>  Edit Forum 
+                            <a asp-controller="Forum" asp-action="Delete" asp-route-id="@Model.Forum.Id" class="btn btn-danger glyphicon glyphicon-trash" style="float:right; margin-left:12px;"></a>  Delete Forum
+                        </span>
+                    </div>
+            }
+            *@

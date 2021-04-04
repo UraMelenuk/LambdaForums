@@ -1,0 +1,43 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model LambdaForums.Models.ApplicationUserL.ProfileModel
+
+@inject UserManager<ApplicationUser> UserManager
+
+<div class="container body-content">
+    <div class="row sectionHeader">
+        <div class="sectionHeading">
+            User Profile
+            <span id="headingBtn">
+                <a asp-controller="Forum" asp-action="Index" class="btn btn-back" style="margin-right:20px;"> Back to Forum </a>
+                <a asp-controller="Home" asp-action="Index" class="btn btn-back"> Back to Latest Post </a>
+            </span>
+        </div>
+    </div>
+    <div class="row userProfile">
+        <div class="col-md-4">
+            <div id="userProfileImage" style="background-image:url(@Model.ProfileImageUrl)"></div>
+            @if (User.Identity.Name == Model.UserName)
+            {
+                <form method="post" enctype="multipart/form-data" asp-controller="Profile" asp-action="UploadProfileImage">
+                    <div id="upload">
+                        <label class="btn btn-default btn-file">
+                            Browse <input type="file" name="file" style="display:none" />
+                        </label>
+                    </div>
+                    <br />
+                    <button type="submit" id="btn-profile" class="btn btn-success"> Submit </button>
+                </form>
+            }
+        </div>
+        <div class="col-md-8">
+            <span id="userName"> @Model.UserName </span>
+            @if (@Model.IsAdmin)
+            {
+                <span class="isAdmin"> Admin </span>
+            }
+            <span id="userRating"> Current Rating: @Model.UserRating </span>
+            <span id="userEmailLabel"> Email: @Model.Email </span>
+            <span id="userCreatedLabel"> Member Since: @Model.MemberSince </span>
+        </div>
+    </div>
+</div>

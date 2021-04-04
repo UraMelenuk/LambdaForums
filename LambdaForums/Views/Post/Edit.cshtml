@@ -1,0 +1,41 @@
+﻿@model LambdaForums.Models.PostL.EditPostModel
+
+<div class="container body-content">
+
+    <div class="row sectionHeader">
+        <div class="sectionHeading">
+            Edit Post
+        </div>
+        <a asp-controller="Post" asp-action="Index" asp-route-id="@Model.Id" class="btn btn-back" style="float:right; margin-right:12px;"> Back to Post </a>
+    </div>
+
+
+    <div class="row">
+        <div id="createForumSection">
+            <form asp-controller="Post" asp-action="Edit" asp-route-id="@Model.Id" method="post" id="createForumForm" enctype="multipart/form-data">
+                <br />
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label asp-for="Title"> Post Title </label>
+                    <input asp-for="Title" class="form-control" placeholder="Choose post title" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Content"></label> <br />
+                    <span asp-validation-for="Content" class="text-danger"></span>
+                    <textarea asp-for="Content" class="form-control" rows="20"></textarea>
+                </div>
+
+                <br />
+                <button type="submit" id="newForumBtn" class="btn btn-submitPost"> Edit Post </button>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Валідація -->
+@section scripts{
+
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
